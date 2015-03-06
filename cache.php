@@ -62,10 +62,11 @@ if (!filter_var($url, FILTER_VALIDATE_URL)) {
 
 $cipher = new Cipher(file_get_contents('secret.txt'));
 
-$encryptedtext = $cipher->encrypt(md5($url));
+$encryptedtext = $cipher->encrypt(md5($_GET['url']));
 
 if ($encryptedtext != $_GET['key']) {
     header('HTTP/1.0 403 Forbidden');
+    echo $_GET['url'];
     exit(0);
 }
 
